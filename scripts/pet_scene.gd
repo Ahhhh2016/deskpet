@@ -13,6 +13,7 @@ func _ready():
 	#responsebox.hide()
 	anim.play("star_shining")
 	set_process_input(true)  # 启用输入检测
+	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -52,3 +53,9 @@ func _on_send_button_pressed() -> void:
 		#append_to_chat("你: " + message)
 		ai_chat.send_message(message)  # 发送消息到 AI
 		inputbox.clear()  # 清空输入框
+
+func _on_inputbox_gui_input(event):
+	if event is InputEventKey and event.pressed and not event.echo:
+		# 检查是否是回车（Enter 或 Return）
+		if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+			_on_send_button_pressed()
