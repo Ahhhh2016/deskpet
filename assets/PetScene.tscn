@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://0wocdldeyug1"]
+[gd_scene load_steps=57 format=3 uid="uid://0wocdldeyug1"]
 
 [ext_resource type="Script" uid="uid://dl11ebld1w7mc" path="res://scripts/pet_scene.gd" id="1_47dl7"]
 [ext_resource type="Texture2D" uid="uid://dohixx74huvn" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-0.png" id="2_1kmvg"]
@@ -51,6 +51,10 @@
 [ext_resource type="Texture2D" uid="uid://bn4mvtjqscfjl" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-1.png" id="35_wxh8c"]
 [ext_resource type="Texture2D" uid="uid://6ifdpwuwovj4" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-2.png" id="36_idllr"]
 [ext_resource type="Texture2D" uid="uid://d4fqxm0pcsjdx" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-3.png" id="37_hsj7n"]
+[ext_resource type="AudioStream" uid="uid://ck1srmxh6oq75" path="res://assets/audio/seiko_sugoi.wav" id="52_v6j8x"]
+[ext_resource type="AudioStream" uid="uid://bbaobqpjp3gij" path="res://assets/audio/seiko_konnichiwa.wav" id="53_7qy21"]
+[ext_resource type="AudioStream" uid="uid://cqrs6hiq4gx6w" path="res://assets/audio/seiko_a~~~.wav" id="54_7qy21"]
+[ext_resource type="AudioStream" uid="uid://bm27cnnjrjhh8" path="res://assets/audio/seiko_oi.wav" id="55_usxvb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycwsm"]
 animations = [{
@@ -289,9 +293,9 @@ offset_bottom = 509.0
 text = "Send"
 
 [node name="ResponseBox" type="RichTextLabel" parent="."]
-offset_left = 542.0
+offset_left = 531.0
 offset_top = 106.0
-offset_right = 820.0
+offset_right = 837.0
 offset_bottom = 209.0
 fit_content = true
 vertical_alignment = 2
@@ -299,6 +303,22 @@ vertical_alignment = 2
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 script = ExtResource("20_cvv26")
+
+[node name="YesButton" type="Button" parent="Timer"]
+offset_left = 575.0
+offset_top = 222.0
+offset_right = 647.0
+offset_bottom = 257.0
+text = "不学了！
+"
+
+[node name="NoButton" type="Button" parent="Timer"]
+anchors_preset = -1
+offset_left = 656.0
+offset_top = 222.0
+offset_right = 792.0
+offset_bottom = 257.0
+text = "那就再学一会儿吧"
 
 [node name="StudyButton" type="Button" parent="."]
 anchors_preset = 5
@@ -339,10 +359,25 @@ offset_bottom = 369.0
 icon = ExtResource("23_8ncpc")
 expand_icon = true
 
+[node name="SugoiAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("52_v6j8x")
+
+[node name="KonnichiwaAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("53_7qy21")
+
+[node name="AaaAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("54_7qy21")
+
+[node name="OiAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("55_usxvb")
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
 [connection signal="pressed" from="DialogButton" to="." method="_on_dialog_button_pressed"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_button_pressed"]
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]
+[connection signal="pressed" from="Timer/YesButton" to="Timer" method="_on_yes_button_pressed"]
+[connection signal="pressed" from="Timer/NoButton" to="Timer" method="_on_no_button_pressed"]
 [connection signal="pressed" from="StudyButton" to="." method="_on_study_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

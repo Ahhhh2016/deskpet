@@ -11,7 +11,22 @@ extends Node2D
 @onready var tomato_btn = $TomatoButton
 @onready var ai_chat = $AIChat # 预加载 AI 交互脚本$AIChat
 @onready var timer = $Timer
+@onready var byeAudio = $AaaAudio
+@onready var oiAudio = $OiAudio
+@onready var helloAudio = $KonnichiwaAudio
+
+	
+var idle_time = 0.0
+const IDLE_THRESHOLD = 3.0
+var last_mouse_pos = Vector2.ZERO
+var is_sleeping = false
+var is_jumping = false
+var is_studying = false
+var is_chatting = false
+
+
 func _ready():
+	helloAudio.play()
 	dialog_trigger_btn.hide()
 	inputbox.hide()
 	send_btn.hide()
@@ -19,7 +34,9 @@ func _ready():
 	exit_btn.hide()
 	tomato_btn.hide()
 	menu_btn.hide()
-	#responsebox.hide()
+	timer.yes_btn.hide()
+	timer.no_btn.hide()
+	responsebox.hide()
 	anim.play("idle")
 	set_process_input(true)  # 启用输入检测
 	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
@@ -43,11 +60,19 @@ func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	#var mouse_pos = get_viewport().get_mouse_position()
 	#position = position.lerp(mouse_pos, 100 * delta)
 func _on_pet_click():
-	anim.play("idle")
-	show_menu()
+	if not is_studying:
+		anim.play("idle")
+		show_menu()
 	#ai_chat.send_message("你好")
 
 func show_menu():
+	anim.play("idle")
+	is_sleeping = false
+	is_studying = false
+	is_chatting = false
+	tomato_btn.hide()
+	menu_btn.hide()
+	responsebox.hide()
 	dialog_trigger_btn.show()
 	study_btn.show()
 	exit_btn.show()
@@ -60,6 +85,9 @@ func _on_dialog_button_pressed() -> void:
 	anim.play("star_shining")
 	dialog_trigger_btn.hide()  # 点击后隐藏图标
 	study_btn.hide()
+	exit_btn.hide()
+	menu_btn.show()
+	is_chatting = true
 	
 
 
@@ -80,15 +108,19 @@ func _on_study_button_pressed() -> void:
 	start_study_mode()
 	
 func _on_exit_button_pressed() -> void:
-	get_tree().quit()  # 退出软件
+	byeAudio.play()
+	await get_tree().create_timer(1.0).timeout  # 等待 2 秒
+	get_tree().quit() # 退出软件
 	
 func start_study_mode():
-	anim.play("reading_book")  
+	anim.play("reading_book")
+	is_studying = true  
 	dialog_trigger_btn.hide()
 	study_btn.hide()
 	exit_btn.hide()
 	tomato_btn.show()
 	menu_btn.show()
+	responsebox.show()
 
 func _on_tomato_button_pressed() -> void:
 	timer.start_pomodoro_timer()
@@ -96,13 +128,7 @@ func _on_tomato_button_pressed() -> void:
 
 func _on_menu_button_pressed() -> void:
 	show_menu()
-	
-var idle_time = 0.0
-const IDLE_THRESHOLD = 3.0
-var last_mouse_pos = Vector2.ZERO
-var is_sleeping = false
-var is_jumping = false
-var was_hovering_last_frame = false
+
 
 func _process(delta):
 	idle_time += delta
@@ -116,6 +142,7 @@ func _process(delta):
 
 	# 如果悬停且当前是 sleeping 状态
 	if is_hovering and is_sleeping:
+		oiAudio.play()
 		anim.play("jumping")
 		is_sleeping = false
 		is_jumping = true
@@ -123,12 +150,12 @@ func _process(delta):
 		return # 立即返回，避免在同一帧内再次触发 jumping
 
 	# 长时间没有鼠标悬停且不是 sleeping 状态，进入 sleeping 状态
-	elif idle_time >= IDLE_THRESHOLD and not is_sleeping and not is_hovering and not is_jumping:
+	elif idle_time >= IDLE_THRESHOLD and not is_sleeping and not is_hovering and not is_jumping and not is_studying and not is_chatting:
 		anim.play("sleeping")
 		is_sleeping = true
 
 	# 如果当前动画不是 idle 且 idle_time 小于阈值，并且不在 jumping 状态，则播放 idle 动画
-	elif anim.animation != "idle" and idle_time < IDLE_THRESHOLD and not is_jumping and not is_sleeping:
+	elif anim.animation != "idle" and idle_time < IDLE_THRESHOLD and not is_jumping and not is_sleeping and not is_studying and not is_chatting:
 		anim.play("idle")
 
 	# 如果当前是 idle 状态，重置 idle_time，确保在 idle 时移动鼠标也能重置
