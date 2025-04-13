@@ -17,12 +17,14 @@ extends Node2D
 
 	
 var idle_time = 0.0
-const IDLE_THRESHOLD = 3.0
+const IDLE_THRESHOLD = 30.0
+const HIDE_MENU_THRESHOLD = 3.0
 var last_mouse_pos = Vector2.ZERO
 var is_sleeping = false
 var is_jumping = false
 var is_studying = false
 var is_chatting = false
+var is_showing_menu = false
 
 
 func _ready():
@@ -70,9 +72,14 @@ func show_menu():
 	is_sleeping = false
 	is_studying = false
 	is_chatting = false
+	menu_btn.position = Vector2(717, 400)  # 改成你想要的位置
+	menu_btn.size = Vector2(30, 30)
+	is_showing_menu = true
 	tomato_btn.hide()
 	menu_btn.hide()
 	responsebox.hide()
+	inputbox.hide()
+	send_btn.hide()
 	dialog_trigger_btn.show()
 	study_btn.show()
 	exit_btn.show()
@@ -86,6 +93,8 @@ func _on_dialog_button_pressed() -> void:
 	dialog_trigger_btn.hide()  # 点击后隐藏图标
 	study_btn.hide()
 	exit_btn.hide()
+	menu_btn.position = Vector2(433, 425)  # 改成你想要的位置
+	menu_btn.size = Vector2(30, 45)
 	menu_btn.show()
 	is_chatting = true
 	
@@ -139,7 +148,12 @@ func _process(delta):
 	if mouse_pos != last_mouse_pos:
 		idle_time = 0.0
 		last_mouse_pos = mouse_pos
-
+	
+	if idle_time >= HIDE_MENU_THRESHOLD and is_showing_menu:
+		dialog_trigger_btn.hide()
+		exit_btn.hide()
+		study_btn.hide()
+	
 	# 如果悬停且当前是 sleeping 状态
 	if is_hovering and is_sleeping:
 		oiAudio.play()
