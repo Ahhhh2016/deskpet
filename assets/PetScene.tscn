@@ -1,31 +1,113 @@
-[gd_scene load_steps=25 format=3 uid="uid://0wocdldeyug1"]
+[gd_scene load_steps=54 format=3 uid="uid://0wocdldeyug1"]
 
 [ext_resource type="Script" uid="uid://dl11ebld1w7mc" path="res://scripts/pet_scene.gd" id="1_47dl7"]
+[ext_resource type="Texture2D" uid="uid://dohixx74huvn" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-0.png" id="2_1kmvg"]
 [ext_resource type="Texture2D" uid="uid://dyyv5w1sujnes" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-0.png" id="2_dbqwn"]
 [ext_resource type="Texture2D" uid="uid://bgs7r1dvx6ibj" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-0.png" id="2_dmkbw"]
 [ext_resource type="Texture2D" uid="uid://bsw01tkpqjptv" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-1.png" id="3_cvv26"]
 [ext_resource type="Texture2D" uid="uid://7oj3vop2c5ma" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-1.png" id="3_v4tvn"]
+[ext_resource type="Texture2D" uid="uid://b1tvhp7teema0" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-1.png" id="3_v6j8x"]
+[ext_resource type="Texture2D" uid="uid://bpmfhc12cp2so" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-2.png" id="4_7qy21"]
 [ext_resource type="Texture2D" uid="uid://8hpesty7smjk" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-2.png" id="4_40m7d"]
 [ext_resource type="Texture2D" uid="uid://dbwy53fxcbdlf" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-2.png" id="4_j6b04"]
 [ext_resource type="Texture2D" uid="uid://bplmjp6463uhs" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-3.png" id="5_51gsb"]
+[ext_resource type="Texture2D" uid="uid://dd5x6t4q07gnu" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-3.png" id="5_usxvb"]
 [ext_resource type="Texture2D" uid="uid://waohxs3e481j" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-3.png" id="5_vsvew"]
 [ext_resource type="Texture2D" uid="uid://dyavesnjqyf72" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-4.png" id="6_8ncpc"]
 [ext_resource type="Texture2D" uid="uid://bdtp3oagcw5ue" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-4.png" id="6_vatob"]
+[ext_resource type="Texture2D" uid="uid://324hc7csqjtf" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-4.png" id="6_wrw41"]
 [ext_resource type="Texture2D" uid="uid://dwv532k326f2g" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-5.png" id="7_aj8ox"]
+[ext_resource type="Texture2D" uid="uid://chrl4iv8tihs0" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-5.png" id="7_c7vks"]
 [ext_resource type="Texture2D" uid="uid://ctt67u4m5eg5p" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-5.png" id="7_tdqf7"]
 [ext_resource type="Texture2D" uid="uid://bmkgtsfts8hco" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-6.png" id="8_4urm2"]
+[ext_resource type="Texture2D" uid="uid://dkdo128xplktr" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-6.png" id="8_l1rtw"]
 [ext_resource type="Texture2D" uid="uid://cl4ha8vkcq04t" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-6.png" id="8_wmonu"]
+[ext_resource type="Texture2D" uid="uid://cyjwe14n2jf13" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-7.png" id="9_g7wxt"]
 [ext_resource type="Texture2D" uid="uid://i7y4n6ua477i" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-7.png" id="9_l7fg2"]
 [ext_resource type="Texture2D" uid="uid://cjp7hq8ncjoet" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-7.png" id="9_oxv0q"]
 [ext_resource type="Script" uid="uid://dvyp8iwtabmva" path="res://scripts/ai_chat.gd" id="10_dmkbw"]
+[ext_resource type="Texture2D" uid="uid://03livxl2rytm" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-8.png" id="10_m33ro"]
+[ext_resource type="Texture2D" uid="uid://depqt15riec2p" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-9.png" id="11_yfukx"]
+[ext_resource type="Texture2D" uid="uid://ceu537a1hyt7p" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-10.png" id="12_3k8tj"]
+[ext_resource type="Texture2D" uid="uid://clq7y8gag7nsp" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-11.png" id="13_v44t5"]
+[ext_resource type="Texture2D" uid="uid://qdbkxw3juts7" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-12.png" id="14_8oj3a"]
+[ext_resource type="Texture2D" uid="uid://bmj3tcklcohll" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-13.png" id="15_3sed6"]
+[ext_resource type="Texture2D" uid="uid://7irggil838cr" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-14.png" id="16_tkx16"]
+[ext_resource type="Texture2D" uid="uid://blmnd0wfdu8we" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-15.png" id="17_3vts4"]
 [ext_resource type="Texture2D" uid="uid://dlad1jffwtm0d" path="res://assets/icon/Speech Bubble Emoji.png" id="19_51gsb"]
 [ext_resource type="Script" uid="uid://760ofafwrh4y" path="res://assets/timer.gd" id="20_cvv26"]
 [ext_resource type="Texture2D" uid="uid://d0ne70ifwmrpw" path="res://assets/icon/Open Book Emoji.png" id="21_8ncpc"]
 [ext_resource type="Texture2D" uid="uid://hgpv757wf8cm" path="res://assets/icon/wave.png" id="22_tdqf7"]
 [ext_resource type="Texture2D" uid="uid://dv56aqjp4p5gb" path="res://assets/icon/tomato.png" id="23_8ncpc"]
+[ext_resource type="Texture2D" uid="uid://bi4ehsk80pbhw" path="res://assets/icon/scroll.png" id="23_tdqf7"]
+[ext_resource type="Texture2D" uid="uid://dnfg2arv68rtt" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-0.png" id="26_pjt4u"]
+[ext_resource type="Texture2D" uid="uid://dvdl8u0qxdcir" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-1.png" id="27_818ms"]
+[ext_resource type="Texture2D" uid="uid://dspk3oxhtd4bh" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-2.png" id="28_twd52"]
+[ext_resource type="Texture2D" uid="uid://b1urtus6ec0j8" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-3.png" id="29_odprj"]
+[ext_resource type="Texture2D" uid="uid://dx00xlmavuohj" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-4.png" id="30_stw68"]
+[ext_resource type="Texture2D" uid="uid://bnplfnwuqafp1" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-5.png" id="31_wso3g"]
+[ext_resource type="Texture2D" uid="uid://dnro24n8mx2y5" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-6.png" id="32_nw8g7"]
+[ext_resource type="Texture2D" uid="uid://f3xc1kxi5knc" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-7.png" id="33_6vmt6"]
+[ext_resource type="Texture2D" uid="uid://l8rje22dgrf3" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-0.png" id="34_ao07d"]
+[ext_resource type="Texture2D" uid="uid://bn4mvtjqscfjl" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-1.png" id="35_wxh8c"]
+[ext_resource type="Texture2D" uid="uid://6ifdpwuwovj4" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-2.png" id="36_idllr"]
+[ext_resource type="Texture2D" uid="uid://d4fqxm0pcsjdx" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-3.png" id="37_hsj7n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycwsm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1kmvg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v6j8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7qy21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_usxvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wrw41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c7vks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l1rtw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g7wxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_m33ro")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_yfukx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3k8tj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_v44t5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8oj3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3sed6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tkx16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3vts4")
+}],
+"loop": true,
+"name": &"jumping",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_dbqwn")
@@ -53,6 +135,64 @@ animations = [{
 }],
 "loop": true,
 "name": &"reading_book",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_pjt4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_818ms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_twd52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_odprj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_stw68")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_wso3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_nw8g7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_6vmt6")
+}],
+"loop": true,
+"name": &"sad_at_corner",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_ao07d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_ao07d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_wxh8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_wxh8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_idllr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_idllr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_hsj7n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_hsj7n")
+}],
+"loop": true,
+"name": &"sleeping",
 "speed": 5.0
 }, {
 "frames": [{
@@ -92,7 +232,7 @@ script = ExtResource("1_47dl7")
 position = Vector2(578, 307.5)
 scale = Vector2(5.41666, 5.35416)
 sprite_frames = SubResource("SpriteFrames_ycwsm")
-animation = &"star_shining"
+animation = &"jumping"
 
 [node name="AIChat" type="Node" parent="."]
 script = ExtResource("10_dmkbw")
@@ -167,14 +307,18 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="MenuButton" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 717.0
+offset_top = 376.0
+offset_right = 747.0
+offset_bottom = 406.0
+icon = ExtResource("23_tdqf7")
+expand_icon = true
 
 [node name="TomatoButton" type="Button" parent="."]
-offset_left = 700.0
-offset_top = 300.0
-offset_right = 730.0
-offset_bottom = 330.0
+offset_left = 717.0
+offset_top = 339.0
+offset_right = 747.0
+offset_bottom = 369.0
 icon = ExtResource("23_8ncpc")
 expand_icon = true
 
