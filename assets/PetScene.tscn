@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://0wocdldeyug1"]
+[gd_scene load_steps=53 format=3 uid="uid://0wocdldeyug1"]
 
 [ext_resource type="Script" uid="uid://dl11ebld1w7mc" path="res://scripts/pet_scene.gd" id="1_47dl7"]
 [ext_resource type="Texture2D" uid="uid://dohixx74huvn" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-0.png" id="2_1kmvg"]
@@ -48,13 +48,35 @@
 [ext_resource type="Texture2D" uid="uid://bnplfnwuqafp1" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-5.png" id="31_wso3g"]
 [ext_resource type="Texture2D" uid="uid://dnro24n8mx2y5" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-6.png" id="32_nw8g7"]
 [ext_resource type="Texture2D" uid="uid://f3xc1kxi5knc" path="res://assets/seikoCorner/f86f2fd0-dbb5-4984-85c2-8dffc76f3602-7.png" id="33_6vmt6"]
-[ext_resource type="Texture2D" uid="uid://l8rje22dgrf3" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-0.png" id="34_ao07d"]
 [ext_resource type="Texture2D" uid="uid://bn4mvtjqscfjl" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-1.png" id="35_wxh8c"]
 [ext_resource type="Texture2D" uid="uid://6ifdpwuwovj4" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-2.png" id="36_idllr"]
 [ext_resource type="Texture2D" uid="uid://d4fqxm0pcsjdx" path="res://assets/seikoSleep/7921ce04-f618-43ea-9dbe-380f235bcbec-3.png" id="37_hsj7n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycwsm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1kmvg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v6j8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8oj3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3sed6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tkx16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3vts4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_1kmvg")
@@ -168,12 +190,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("34_ao07d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_ao07d")
-}, {
-"duration": 1.0,
 "texture": ExtResource("35_wxh8c")
 }, {
 "duration": 1.0,
@@ -274,10 +290,11 @@ text = "Send"
 
 [node name="ResponseBox" type="RichTextLabel" parent="."]
 offset_left = 542.0
-offset_top = 96.0
+offset_top = 106.0
 offset_right = 820.0
-offset_bottom = 199.0
+offset_bottom = 209.0
 fit_content = true
+vertical_alignment = 2
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -322,9 +339,11 @@ offset_bottom = 369.0
 icon = ExtResource("23_8ncpc")
 expand_icon = true
 
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
-[connection signal="pressed" from="DialogButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="DialogButton" to="." method="_on_dialog_button_pressed"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_button_pressed"]
 [connection signal="pressed" from="StudyButton" to="." method="_on_study_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="TomatoButton" to="." method="_on_tomato_button_pressed"]

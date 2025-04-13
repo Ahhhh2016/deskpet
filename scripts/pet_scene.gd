@@ -18,16 +18,18 @@ func _ready():
 	study_btn.hide()
 	exit_btn.hide()
 	tomato_btn.hide()
+	menu_btn.hide()
 	#responsebox.hide()
-	anim.play("star_shining")
+	anim.play("idle")
 	set_process_input(true)  # 启用输入检测
 	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
+	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		var mouse_pos = event.position
 		if is_mouse_over_pet(mouse_pos):
-			show_icon()  
+			#show_menu()  
 			_on_pet_click() # 检查鼠标是否点在宠物上
 
 func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
@@ -41,20 +43,24 @@ func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	#var mouse_pos = get_viewport().get_mouse_position()
 	#position = position.lerp(mouse_pos, 100 * delta)
 func _on_pet_click():
-	show_icon()
+	anim.play("idle")
+	show_menu()
 	#ai_chat.send_message("你好")
 
-func show_icon():
+func show_menu():
 	dialog_trigger_btn.show()
 	study_btn.show()
 	exit_btn.show()
 	anim.set_process_input(false)  # 禁止宠物继续接受输入，避免重复点击
 
 
-func _on_button_pressed() -> void:
+func _on_dialog_button_pressed() -> void:
 	inputbox.show()
 	send_btn.show()
+	anim.play("star_shining")
 	dialog_trigger_btn.hide()  # 点击后隐藏图标
+	study_btn.hide()
+	
 
 
 func _on_send_button_pressed() -> void:
@@ -82,9 +88,64 @@ func start_study_mode():
 	study_btn.hide()
 	exit_btn.hide()
 	tomato_btn.show()
-	
-	
-
+	menu_btn.show()
 
 func _on_tomato_button_pressed() -> void:
 	timer.start_pomodoro_timer()
+
+
+func _on_menu_button_pressed() -> void:
+	show_menu()
+	
+var idle_time = 0.0
+const IDLE_THRESHOLD = 3.0
+var last_mouse_pos = Vector2.ZERO
+var is_sleeping = false
+var is_jumping = false
+var was_hovering_last_frame = false
+
+func _process(delta):
+	idle_time += delta
+	var mouse_pos = get_viewport().get_mouse_position()
+	var is_hovering = is_mouse_over_pet(mouse_pos)
+
+	# 鼠标移动时重置 idle_time
+	if mouse_pos != last_mouse_pos:
+		idle_time = 0.0
+		last_mouse_pos = mouse_pos
+
+	# 如果悬停且当前是 sleeping 状态
+	if is_hovering and is_sleeping:
+		anim.play("jumping")
+		is_sleeping = false
+		is_jumping = true
+		idle_time = 0.0 # 唤醒时重置 idle_time
+		return # 立即返回，避免在同一帧内再次触发 jumping
+
+	# 长时间没有鼠标悬停且不是 sleeping 状态，进入 sleeping 状态
+	elif idle_time >= IDLE_THRESHOLD and not is_sleeping and not is_hovering and not is_jumping:
+		anim.play("sleeping")
+		is_sleeping = true
+
+	# 如果当前动画不是 idle 且 idle_time 小于阈值，并且不在 jumping 状态，则播放 idle 动画
+	elif anim.animation != "idle" and idle_time < IDLE_THRESHOLD and not is_jumping and not is_sleeping:
+		anim.play("idle")
+
+	# 如果当前是 idle 状态，重置 idle_time，确保在 idle 时移动鼠标也能重置
+	elif anim.animation == "idle" and is_hovering:
+		idle_time = 0.0
+
+#func _on_animation_finished():
+	#if anim.animation == "jumping":
+		#print(anim.animation)
+		#anim.play("idle")
+		#is_jumping = false
+		#return
+
+
+func _on_animated_sprite_2d_animation_looped() -> void:
+	if anim.animation == "jumping":
+		print(anim.animation)
+		anim.play("idle")
+		is_jumping = false
+		return
