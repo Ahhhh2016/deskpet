@@ -1,19 +1,60 @@
-[gd_scene load_steps=13 format=3 uid="uid://0wocdldeyug1"]
+[gd_scene load_steps=25 format=3 uid="uid://0wocdldeyug1"]
 
 [ext_resource type="Script" uid="uid://dl11ebld1w7mc" path="res://scripts/pet_scene.gd" id="1_47dl7"]
+[ext_resource type="Texture2D" uid="uid://dyyv5w1sujnes" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-0.png" id="2_dbqwn"]
 [ext_resource type="Texture2D" uid="uid://bgs7r1dvx6ibj" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-0.png" id="2_dmkbw"]
+[ext_resource type="Texture2D" uid="uid://bsw01tkpqjptv" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-1.png" id="3_cvv26"]
 [ext_resource type="Texture2D" uid="uid://7oj3vop2c5ma" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-1.png" id="3_v4tvn"]
 [ext_resource type="Texture2D" uid="uid://8hpesty7smjk" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-2.png" id="4_40m7d"]
+[ext_resource type="Texture2D" uid="uid://dbwy53fxcbdlf" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-2.png" id="4_j6b04"]
+[ext_resource type="Texture2D" uid="uid://bplmjp6463uhs" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-3.png" id="5_51gsb"]
 [ext_resource type="Texture2D" uid="uid://waohxs3e481j" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-3.png" id="5_vsvew"]
+[ext_resource type="Texture2D" uid="uid://dyavesnjqyf72" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-4.png" id="6_8ncpc"]
 [ext_resource type="Texture2D" uid="uid://bdtp3oagcw5ue" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-4.png" id="6_vatob"]
 [ext_resource type="Texture2D" uid="uid://dwv532k326f2g" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-5.png" id="7_aj8ox"]
+[ext_resource type="Texture2D" uid="uid://ctt67u4m5eg5p" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-5.png" id="7_tdqf7"]
+[ext_resource type="Texture2D" uid="uid://bmkgtsfts8hco" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-6.png" id="8_4urm2"]
 [ext_resource type="Texture2D" uid="uid://cl4ha8vkcq04t" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-6.png" id="8_wmonu"]
+[ext_resource type="Texture2D" uid="uid://i7y4n6ua477i" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-7.png" id="9_l7fg2"]
 [ext_resource type="Texture2D" uid="uid://cjp7hq8ncjoet" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-7.png" id="9_oxv0q"]
 [ext_resource type="Script" uid="uid://dvyp8iwtabmva" path="res://scripts/ai_chat.gd" id="10_dmkbw"]
-[ext_resource type="Texture2D" uid="uid://do3tb6dmswe4t" path="res://assets/dialog_trigger_icon.png" id="11_v4tvn"]
+[ext_resource type="Texture2D" uid="uid://dlad1jffwtm0d" path="res://assets/icon/Speech Bubble Emoji.png" id="19_51gsb"]
+[ext_resource type="Script" uid="uid://760ofafwrh4y" path="res://assets/timer.gd" id="20_cvv26"]
+[ext_resource type="Texture2D" uid="uid://d0ne70ifwmrpw" path="res://assets/icon/Open Book Emoji.png" id="21_8ncpc"]
+[ext_resource type="Texture2D" uid="uid://hgpv757wf8cm" path="res://assets/icon/wave.png" id="22_tdqf7"]
+[ext_resource type="Texture2D" uid="uid://dv56aqjp4p5gb" path="res://assets/icon/tomato.png" id="23_8ncpc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycwsm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dbqwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cvv26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j6b04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_51gsb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8ncpc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tdqf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4urm2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_l7fg2")
+}],
+"loop": true,
+"name": &"reading_book",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_dmkbw")
@@ -48,8 +89,8 @@ animations = [{
 script = ExtResource("1_47dl7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(579.5, 303.5)
-scale = Vector2(5.47916, 5.52083)
+position = Vector2(578, 307.5)
+scale = Vector2(5.41666, 5.35416)
 sprite_frames = SubResource("SpriteFrames_ycwsm")
 animation = &"star_shining"
 
@@ -58,18 +99,19 @@ script = ExtResource("10_dmkbw")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="AIChat"]
 
-[node name="Button" type="Button" parent="."]
+[node name="DialogButton" type="Button" parent="."]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 451.0
-offset_top = 164.0
-offset_right = 520.0
-offset_bottom = 236.0
+offset_left = 723.0
+offset_top = 197.0
+offset_right = 753.0
+offset_bottom = 227.0
 grow_horizontal = 0
 grow_vertical = 2
-icon = ExtResource("11_v4tvn")
+icon = ExtResource("19_51gsb")
+clip_text = true
 icon_alignment = 1
 expand_icon = true
 
@@ -97,6 +139,48 @@ offset_right = 820.0
 offset_bottom = 199.0
 fit_content = true
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("20_cvv26")
+
+[node name="StudyButton" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 723.0
+offset_top = 238.0
+offset_right = 753.0
+offset_bottom = 268.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+icon = ExtResource("21_8ncpc")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 723.0
+offset_top = 280.0
+offset_right = 753.0
+offset_bottom = 310.0
+icon = ExtResource("22_tdqf7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MenuButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="TomatoButton" type="Button" parent="."]
+offset_left = 700.0
+offset_top = 300.0
+offset_right = 730.0
+offset_bottom = 330.0
+icon = ExtResource("23_8ncpc")
+expand_icon = true
+
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="DialogButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="SendButton" to="." method="_on_send_button_pressed"]
+[connection signal="pressed" from="StudyButton" to="." method="_on_study_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="TomatoButton" to="." method="_on_tomato_button_pressed"]
