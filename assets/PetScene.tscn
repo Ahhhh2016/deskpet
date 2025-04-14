@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://0wocdldeyug1"]
+[gd_scene load_steps=59 format=3 uid="uid://0wocdldeyug1"]
 
 [ext_resource type="Script" uid="uid://dl11ebld1w7mc" path="res://scripts/pet_scene.gd" id="1_47dl7"]
 [ext_resource type="Texture2D" uid="uid://dohixx74huvn" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-0.png" id="2_1kmvg"]
@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://7irggil838cr" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-14.png" id="16_tkx16"]
 [ext_resource type="Texture2D" uid="uid://blmnd0wfdu8we" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-15.png" id="17_3vts4"]
 [ext_resource type="Texture2D" uid="uid://dlad1jffwtm0d" path="res://assets/icon/Speech Bubble Emoji.png" id="19_51gsb"]
-[ext_resource type="Script" uid="uid://760ofafwrh4y" path="res://assets/timer.gd" id="20_cvv26"]
+[ext_resource type="Script" uid="uid://760ofafwrh4y" path="res://scripts/timer.gd" id="20_cvv26"]
 [ext_resource type="Texture2D" uid="uid://d0ne70ifwmrpw" path="res://assets/icon/Open Book Emoji.png" id="21_8ncpc"]
 [ext_resource type="Texture2D" uid="uid://hgpv757wf8cm" path="res://assets/icon/wave.png" id="22_tdqf7"]
 [ext_resource type="Texture2D" uid="uid://dv56aqjp4p5gb" path="res://assets/icon/tomato.png" id="23_8ncpc"]
@@ -55,6 +55,8 @@
 [ext_resource type="AudioStream" uid="uid://bbaobqpjp3gij" path="res://assets/audio/seiko_konnichiwa.wav" id="53_7qy21"]
 [ext_resource type="AudioStream" uid="uid://cqrs6hiq4gx6w" path="res://assets/audio/seiko_a~~~.wav" id="54_7qy21"]
 [ext_resource type="AudioStream" uid="uid://bm27cnnjrjhh8" path="res://assets/audio/seiko_oi.wav" id="55_usxvb"]
+[ext_resource type="Script" uid="uid://cs73wkf3ows1u" path="res://scripts/settings_panel.gd" id="56_wrw41"]
+[ext_resource type="Texture2D" uid="uid://nb45xx2xafk7" path="res://assets/icon/gear.png" id="57_c7vks"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycwsm"]
 animations = [{
@@ -252,7 +254,7 @@ script = ExtResource("1_47dl7")
 position = Vector2(578, 307.5)
 scale = Vector2(5.41666, 5.35416)
 sprite_frames = SubResource("SpriteFrames_ycwsm")
-animation = &"jumping"
+animation = &"reading_book"
 
 [node name="AIChat" type="Node" parent="."]
 script = ExtResource("10_dmkbw")
@@ -313,7 +315,6 @@ text = "不学了！
 "
 
 [node name="NoButton" type="Button" parent="Timer"]
-anchors_preset = -1
 offset_left = 656.0
 offset_top = 222.0
 offset_right = 792.0
@@ -371,6 +372,95 @@ stream = ExtResource("54_7qy21")
 [node name="OiAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("55_usxvb")
 
+[node name="SettingsPanel" type="Panel" parent="."]
+offset_left = 217.0
+offset_top = -60.0
+offset_right = 964.0
+offset_bottom = 131.0
+script = ExtResource("56_wrw41")
+
+[node name="ApiKeyInput" type="TextEdit" parent="SettingsPanel"]
+layout_mode = 2
+offset_left = 169.0
+offset_top = 53.0
+offset_right = 465.0
+offset_bottom = 98.0
+
+[node name="MuteCheckButton" type="CheckButton" parent="SettingsPanel"]
+layout_mode = 2
+offset_left = 86.0
+offset_top = 91.0
+offset_right = 177.0
+offset_bottom = 146.0
+
+[node name="QuitButton" type="Button" parent="SettingsPanel"]
+layout_mode = 2
+offset_left = 370.0
+offset_top = 141.0
+offset_right = 443.0
+offset_bottom = 193.0
+text = "退出
+"
+
+[node name="SaveButton" type="Button" parent="SettingsPanel"]
+layout_mode = 2
+offset_left = 285.0
+offset_top = 144.0
+offset_right = 349.0
+offset_bottom = 186.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "保存
+"
+
+[node name="Label" type="RichTextLabel" parent="SettingsPanel"]
+layout_mode = 2
+offset_left = 41.0
+offset_top = 62.0
+offset_right = 212.0
+offset_bottom = 107.0
+text = "API key:"
+
+[node name="Label2" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 113.0
+offset_right = 100.0
+offset_bottom = 136.181
+text = "静音🔔"
+
+[node name="Label3" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 10.0
+offset_right = 364.0
+offset_bottom = 33.0
+text = "设置"
+
+[node name="Label4" type="Label" parent="SettingsPanel"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 113.0
+offset_right = 235.0
+offset_bottom = 140.0
+text = "🔕"
+
+[node name="SettingsButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 693.0
+offset_top = 431.0
+offset_right = 723.0
+offset_bottom = 461.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("57_c7vks")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
 [connection signal="pressed" from="DialogButton" to="." method="_on_dialog_button_pressed"]
@@ -382,3 +472,7 @@ stream = ExtResource("55_usxvb")
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="TomatoButton" to="." method="_on_tomato_button_pressed"]
+[connection signal="toggled" from="SettingsPanel/MuteCheckButton" to="SettingsPanel" method="_on_mute_check_button_toggled"]
+[connection signal="pressed" from="SettingsPanel/QuitButton" to="SettingsPanel" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/SaveButton" to="SettingsPanel" method="_on_save_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

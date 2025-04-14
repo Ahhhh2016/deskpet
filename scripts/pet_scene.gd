@@ -14,7 +14,10 @@ extends Node2D
 @onready var byeAudio = $AaaAudio
 @onready var oiAudio = $OiAudio
 @onready var helloAudio = $KonnichiwaAudio
+@onready var settings_panel = $SettingsPanel
 
+var api_key: String = "xxxxx"
+var is_muted: bool = false
 	
 var idle_time = 0.0
 const IDLE_THRESHOLD = 30.0
@@ -43,7 +46,11 @@ func _ready():
 	set_process_input(true)  # 启用输入检测
 	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
-
+	
+	settings_panel.settings_saved.connect(_on_settings_saved)
+	settings_panel.back_pressed.connect(_on_settings_back)
+	settings_panel.hide()
+	
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		var mouse_pos = event.position
@@ -190,3 +197,18 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 		anim.play("idle")
 		is_jumping = false
 		return
+
+func _on_settings_saved(new_api_key: String, muted: bool):
+	api_key = new_api_key
+	is_muted = muted
+	print("新 API Key: ", api_key)
+	print("是否静音: ", is_muted)
+	settings_panel.hide()
+
+func _on_settings_back():
+	settings_panel.hide()
+
+
+func _on_settings_button_pressed() -> void:
+	settings_panel.set_initial_values(api_key, is_muted)
+	settings_panel.show()
