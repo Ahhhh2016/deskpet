@@ -16,7 +16,7 @@ extends Node2D
 @onready var helloAudio = $KonnichiwaAudio
 @onready var settings_panel = $SettingsPanel
 
-var api_key: String = "xxxxx"
+var api_key: String = ""
 var is_muted: bool = false
 	
 var idle_time = 0.0
@@ -47,9 +47,17 @@ func _ready():
 	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
-	settings_panel.settings_saved.connect(_on_settings_saved)
-	settings_panel.back_pressed.connect(_on_settings_back)
-	settings_panel.hide()
+	if not has_api_key():
+		print("yes")
+		settings_panel.show()
+		settings_panel.settings_saved.connect(_on_settings_saved)
+		settings_panel.back_pressed.connect(_on_settings_back)
+	else:
+		api_key = load_api_key()
+		print("key:", api_key)
+		ai_chat.set_api_key(api_key)
+		settings_panel.hide()
+
 	
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -212,3 +220,21 @@ func _on_settings_back():
 func _on_settings_button_pressed() -> void:
 	settings_panel.set_initial_values(api_key, is_muted)
 	settings_panel.show()
+	
+func has_api_key() -> bool:
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err != OK:
+		return false
+	print("🔍 Loaded api_key:", api_key, "（长度：", api_key.length(), "）")
+	return config.has_section_key("auth", "api_key") and config.get_value("auth", "api_key", "").strip_edges().length() > 0
+
+func load_api_key() -> String:
+	var config = ConfigFile.new()
+	if config.load("user://settings.cfg") == OK:
+		return config.get_value("auth", "api_key", "")
+	return ""
+
+func _on_api_key_saved(key: String):
+	print("API key saved: ", key)
+	ai_chat.set_api_key(key)

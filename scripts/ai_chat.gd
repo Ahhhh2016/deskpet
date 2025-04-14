@@ -1,6 +1,6 @@
 extends Node
 
-var api_key = "sk-3e99f796630442e7887c27ad94d8cdef"
+var api_key = ""
 var app_id = "49ab8a790c11476588d9dd4746b745bb"
 var url = "https://dashscope.aliyuncs.com/api/v1/apps/%s/completion" % app_id
 @onready var http_request = $HTTPRequest  # 获取 HTTPRequest 节点
@@ -11,8 +11,13 @@ func _ready():
 		return
 	http_request.request_completed.connect(_on_request_completed)
 
+
+func set_api_key(key: String):
+	api_key = key
+	print("key here", api_key)
+
 func send_message(message: String):
-	print("发送消息到 API: ", message)
+	#print("发送消息到 API: ", message)
 	responsebox.show()
 	
 	var headers = [
@@ -37,7 +42,8 @@ func send_message(message: String):
 # 处理 API 响应
 func _on_request_completed(result, response_code, headers, body):
 	var data = body.get_string_from_utf8()
+	#print("🔍 原始返回数据：", data)
 	var response = JSON.parse_string(data) # Returns null if parsing failed.
 	response = response["output"]["text"]
-	print(response)
+	#print(response)
 	responsebox.text = response
