@@ -21,7 +21,7 @@ var api_key: String = ""
 var is_muted: bool = false
 	
 var idle_time = 0.0
-const IDLE_THRESHOLD = 30.0
+const IDLE_THRESHOLD = 5.0
 const HIDE_MENU_THRESHOLD = 3.0
 var last_mouse_pos = Vector2.ZERO
 var is_sleeping = false
@@ -156,6 +156,7 @@ func start_study_mode():
 	menu_btn.show()
 	settings_btn.hide()
 	responsebox.show()
+	responsebox.text = ""
 
 func _on_tomato_button_pressed() -> void:
 	timer.start_pomodoro_timer()
