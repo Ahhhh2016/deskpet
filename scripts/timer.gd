@@ -30,12 +30,13 @@ func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	return sprite_rect.has_point(mouse_pos)
 
 func _on_pet_click():
-	set_process(false)
-	print("click")
-	yes_btn.show()
-	no_btn.show()
-	#responsebox.show()
-	responsebox.text = "确定要退出了吗？不再学一会儿了吗～🥺"
+	if time_left > 0:
+		set_process(false)
+		#print("click")
+		yes_btn.show()
+		no_btn.show()
+		#responsebox.show()
+		responsebox.text = "确定要退出了吗？不再学一会儿了吗～🥺"
 	
 	
 

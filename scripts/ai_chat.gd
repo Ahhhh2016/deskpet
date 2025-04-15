@@ -14,7 +14,7 @@ func _ready():
 
 func set_api_key(key: String):
 	api_key = key
-	print("key here", api_key)
+	#print("key here", api_key)
 
 func send_message(message: String):
 	#print("发送消息到 API: ", message)

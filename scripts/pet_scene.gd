@@ -75,14 +75,6 @@ func _ready():
 		ai_chat.set_api_key(api_key)
 		settings_panel.hide()
 
-	
-#func _input(event):
-	#if event is InputEventMouseButton and event.pressed:
-		#var mouse_pos = event.position
-		#if is_mouse_over_pet(mouse_pos):
-			##show_menu()  
-			#_on_pet_click() # 检查鼠标是否点在宠物上
-
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -111,9 +103,6 @@ func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	)
 	return sprite_rect.has_point(mouse_pos)
 
-#func _process(delta):
-	#var mouse_pos = get_viewport().get_mouse_position()
-	#position = position.lerp(mouse_pos, 100 * delta)
 func _on_pet_click():
 	if not is_studying:
 		anim.play("idle")
@@ -246,17 +235,10 @@ func _process(delta):
 	elif anim.animation == "idle" and is_hovering:
 		idle_time = 0.0
 
-#func _on_animation_finished():
-	#if anim.animation == "jumping":
-		#print(anim.animation)
-		#anim.play("idle")
-		#is_jumping = false
-		#return
-
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if anim.animation == "jumping":
-		print(anim.animation)
+		#print(anim.animation)
 		anim.play("idle")
 		is_jumping = false
 		return
