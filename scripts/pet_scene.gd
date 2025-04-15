@@ -202,7 +202,7 @@ func _process(delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	var is_hovering = is_mouse_over_pet(mouse_pos)
 
-	if dragging:
+	if dragging and not is_studying and not is_chatting:
 		anim.play("busy")
 		var screen_size = get_viewport().get_visible_rect().size
 		position.x = clamp(position.x, 0, screen_size.x)
@@ -224,7 +224,7 @@ func _process(delta):
 		settings_btn.hide()
 	
 	# 如果悬停且当前是 sleeping 状态
-	if is_hovering and not dragging:
+	if is_hovering and not dragging and not is_studying and not is_chatting:
 		if not is_muted:
 			oiAudio.play()
 		anim.play("jumping")
