@@ -373,41 +373,41 @@ stream = ExtResource("54_7qy21")
 stream = ExtResource("55_usxvb")
 
 [node name="SettingsPanel" type="Panel" parent="."]
-offset_left = 217.0
-offset_top = -60.0
-offset_right = 964.0
-offset_bottom = 131.0
+offset_left = 347.0
+offset_top = 5.0
+offset_right = 859.0
+offset_bottom = 204.0
 script = ExtResource("56_wrw41")
 
 [node name="ApiKeyInput" type="TextEdit" parent="SettingsPanel"]
 layout_mode = 2
-offset_left = 169.0
-offset_top = 53.0
-offset_right = 465.0
-offset_bottom = 98.0
+offset_left = 120.0
+offset_top = 58.0
+offset_right = 471.0
+offset_bottom = 103.0
 
 [node name="MuteCheckButton" type="CheckButton" parent="SettingsPanel"]
 layout_mode = 2
-offset_left = 86.0
-offset_top = 91.0
-offset_right = 177.0
-offset_bottom = 146.0
+offset_left = 117.0
+offset_top = 96.0
+offset_right = 208.0
+offset_bottom = 151.0
 
 [node name="QuitButton" type="Button" parent="SettingsPanel"]
 layout_mode = 2
-offset_left = 370.0
-offset_top = 141.0
-offset_right = 443.0
-offset_bottom = 193.0
+offset_left = 408.0
+offset_top = 145.0
+offset_right = 468.0
+offset_bottom = 185.0
 text = "退出
 "
 
 [node name="SaveButton" type="Button" parent="SettingsPanel"]
 layout_mode = 2
-offset_left = 285.0
-offset_top = 144.0
-offset_right = 349.0
-offset_bottom = 186.0
+offset_left = 329.0
+offset_top = 145.0
+offset_right = 389.0
+offset_bottom = 185.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "保存
@@ -423,27 +423,27 @@ text = "API key:"
 
 [node name="Label2" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 113.0
-offset_right = 100.0
-offset_bottom = 136.181
-text = "静音🔔"
+offset_left = 39.0
+offset_top = 114.0
+offset_right = 164.0
+offset_bottom = 138.0
+text = "声音:            🔉"
 
 [node name="Label3" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 324.0
-offset_top = 10.0
-offset_right = 364.0
-offset_bottom = 33.0
+offset_left = 238.0
+offset_top = 16.0
+offset_right = 278.0
+offset_bottom = 39.0
 text = "设置"
 
 [node name="Label4" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 205.0
-offset_top = 113.0
-offset_right = 235.0
-offset_bottom = 140.0
-text = "🔕"
+offset_left = 219.0
+offset_top = 114.0
+offset_right = 249.0
+offset_bottom = 141.0
+text = "🔇"
 
 [node name="SettingsButton" type="Button" parent="."]
 anchors_preset = 8
