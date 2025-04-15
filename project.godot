@@ -10,12 +10,17 @@ config_version=5
 
 [application]
 
-config/name="deskpet"
+config/name="deskpet-seiko"
 run/main_scene="uid://0wocdldeyug1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://dlm3sxk7nvuq5"
+
+[display]
+
+window/size/transparent=true
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/transparent_background=true

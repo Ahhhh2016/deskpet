@@ -46,7 +46,9 @@ func _ready():
 	api_key = settings_panel.api_key_input.text
 	is_muted = settings_panel.is_muted
 	
+	# 设置背景透明和一直置于顶层
 	get_window().always_on_top = true
+	get_window().set_transparent_background(true)
 	
 	if not is_muted:
 		helloAudio.play()
