@@ -1,15 +1,19 @@
-[gd_scene load_steps=59 format=3 uid="uid://0wocdldeyug1"]
+[gd_scene load_steps=63 format=3 uid="uid://0wocdldeyug1"]
 
 [ext_resource type="Script" uid="uid://dl11ebld1w7mc" path="res://scripts/pet_scene.gd" id="1_47dl7"]
 [ext_resource type="Texture2D" uid="uid://dohixx74huvn" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-0.png" id="2_1kmvg"]
 [ext_resource type="Texture2D" uid="uid://dyyv5w1sujnes" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-0.png" id="2_dbqwn"]
 [ext_resource type="Texture2D" uid="uid://bgs7r1dvx6ibj" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-0.png" id="2_dmkbw"]
+[ext_resource type="Texture2D" uid="uid://cxm1sybw8gmb8" path="res://assets/seikoBusy/9c1141ac-e8cf-44f8-9568-e5667c11050d-0.png" id="2_yfukx"]
+[ext_resource type="Texture2D" uid="uid://baabwc55ths86" path="res://assets/seikoBusy/9c1141ac-e8cf-44f8-9568-e5667c11050d-1.png" id="3_3k8tj"]
 [ext_resource type="Texture2D" uid="uid://bsw01tkpqjptv" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-1.png" id="3_cvv26"]
 [ext_resource type="Texture2D" uid="uid://7oj3vop2c5ma" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-1.png" id="3_v4tvn"]
 [ext_resource type="Texture2D" uid="uid://b1tvhp7teema0" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-1.png" id="3_v6j8x"]
 [ext_resource type="Texture2D" uid="uid://bpmfhc12cp2so" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-2.png" id="4_7qy21"]
 [ext_resource type="Texture2D" uid="uid://8hpesty7smjk" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-2.png" id="4_40m7d"]
 [ext_resource type="Texture2D" uid="uid://dbwy53fxcbdlf" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-2.png" id="4_j6b04"]
+[ext_resource type="Texture2D" uid="uid://bopp25owmccev" path="res://assets/seikoBusy/9c1141ac-e8cf-44f8-9568-e5667c11050d-2.png" id="4_v44t5"]
+[ext_resource type="Texture2D" uid="uid://cyogpjw3q77yh" path="res://assets/seikoBusy/9c1141ac-e8cf-44f8-9568-e5667c11050d-3.png" id="5_8oj3a"]
 [ext_resource type="Texture2D" uid="uid://bplmjp6463uhs" path="res://assets/seikoRead/5d3b4e87-f939-411d-a31b-d89667dc08f0-3.png" id="5_51gsb"]
 [ext_resource type="Texture2D" uid="uid://dd5x6t4q07gnu" path="res://assets/seikoJump/77a35fd0-684c-4b56-afb9-81dfe608acf7-3.png" id="5_usxvb"]
 [ext_resource type="Texture2D" uid="uid://waohxs3e481j" path="res://assets/seikoStar/992d41a0-cfc1-403b-9156-a07f568e0d02-3.png" id="5_vsvew"]
@@ -60,6 +64,23 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycwsm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yfukx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3k8tj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v44t5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8oj3a")
+}],
+"loop": true,
+"name": &"busy",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_1kmvg")
@@ -254,7 +275,7 @@ script = ExtResource("1_47dl7")
 position = Vector2(578, 307.5)
 scale = Vector2(5.41666, 5.35416)
 sprite_frames = SubResource("SpriteFrames_ycwsm")
-animation = &"reading_book"
+animation = &"busy"
 
 [node name="AIChat" type="Node" parent="."]
 script = ExtResource("10_dmkbw")

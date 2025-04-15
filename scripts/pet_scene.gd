@@ -30,6 +30,12 @@ var is_studying = false
 var is_chatting = false
 var is_showing_menu = false
 
+var dragging = false
+var drag_offset = Vector2.ZERO
+var click_start_time := 0.0
+var click_start_pos := Vector2.ZERO
+const DRAG_DISTANCE_THRESHOLD := 10.0
+const CLICK_TIME_THRESHOLD := 0.2
 
 func _ready():
 	settings_panel.settings_saved.connect(_on_settings_saved)
@@ -39,6 +45,8 @@ func _ready():
 	settings_panel.load_settings()
 	api_key = settings_panel.api_key_input.text
 	is_muted = settings_panel.is_muted
+	
+	get_window().always_on_top = true
 	
 	if not is_muted:
 		helloAudio.play()
@@ -66,12 +74,33 @@ func _ready():
 		settings_panel.hide()
 
 	
+#func _input(event):
+	#if event is InputEventMouseButton and event.pressed:
+		#var mouse_pos = event.position
+		#if is_mouse_over_pet(mouse_pos):
+			##show_menu()  
+			#_on_pet_click() # 检查鼠标是否点在宠物上
+
 func _input(event):
-	if event is InputEventMouseButton and event.pressed:
-		var mouse_pos = event.position
-		if is_mouse_over_pet(mouse_pos):
-			#show_menu()  
-			_on_pet_click() # 检查鼠标是否点在宠物上
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				var mouse_pos = event.position
+				if is_mouse_over_pet(mouse_pos):
+					click_start_time = Time.get_ticks_msec() / 1000.0
+					click_start_pos = mouse_pos
+					dragging = true
+					drag_offset = global_position - mouse_pos
+			else:
+				var click_duration = Time.get_ticks_msec() / 1000.0 - click_start_time
+				var move_distance = click_start_pos.distance_to(event.position)
+				if click_duration < CLICK_TIME_THRESHOLD and move_distance < DRAG_DISTANCE_THRESHOLD:
+					_on_pet_click() # 判定为点击
+				dragging = false
+
+	elif event is InputEventMouseMotion and dragging:
+		global_position = event.position + drag_offset
+
 
 func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	var sprite_rect = Rect2(
@@ -171,6 +200,16 @@ func _process(delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	var is_hovering = is_mouse_over_pet(mouse_pos)
 
+	if dragging:
+		anim.play("busy")
+		var screen_size = get_viewport().get_visible_rect().size
+		position.x = clamp(position.x, 0, screen_size.x)
+		position.y = clamp(position.y, 0, screen_size.y)
+		dialog_trigger_btn.hide()
+		study_btn.hide()
+		exit_btn.hide()
+		settings_btn.hide()
+		
 	# 鼠标移动时重置 idle_time
 	if mouse_pos != last_mouse_pos:
 		idle_time = 0.0
@@ -183,7 +222,7 @@ func _process(delta):
 		settings_btn.hide()
 	
 	# 如果悬停且当前是 sleeping 状态
-	if is_hovering:
+	if is_hovering and not dragging:
 		if not is_muted:
 			oiAudio.play()
 		anim.play("jumping")
