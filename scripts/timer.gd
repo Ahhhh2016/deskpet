@@ -8,8 +8,8 @@ extends Timer
 @onready var yes_btn = $YesButton
 @onready var no_btn = $NoButton
 @onready var parent_node = get_parent()
-var study_time = 25 * 60  # 25分钟
-#var study_time = 5
+#var study_time = 25 * 60  # 25分钟
+var study_time = 5
 
 var is_study = false
 
@@ -67,7 +67,9 @@ func update_responsebox():
 
 func _on_timeout() -> void:
 	responsebox.text = "休息一下吧！☕️ 你太棒啦～"
-	sugoi.play()
+	if not parent_node.is_muted:
+		print(parent_node.is_muted)
+		sugoi.play()
 	tomato_btn.show()
 	menu_btn.show()
 

@@ -15,6 +15,7 @@ extends Node2D
 @onready var oiAudio = $OiAudio
 @onready var helloAudio = $KonnichiwaAudio
 @onready var settings_panel = $SettingsPanel
+@onready var settings_btn = $SettingsButton
 
 var api_key: String = ""
 var is_muted: bool = false
@@ -31,7 +32,16 @@ var is_showing_menu = false
 
 
 func _ready():
-	helloAudio.play()
+	settings_panel.settings_saved.connect(_on_settings_saved)
+	settings_panel.back_pressed.connect(_on_settings_back)
+
+	# 加载设置面板的初始值
+	settings_panel.load_settings()
+	api_key = settings_panel.api_key_input.text
+	is_muted = settings_panel.is_muted
+	
+	if not is_muted:
+		helloAudio.play()
 	dialog_trigger_btn.hide()
 	inputbox.hide()
 	send_btn.hide()
@@ -39,6 +49,7 @@ func _ready():
 	exit_btn.hide()
 	tomato_btn.hide()
 	menu_btn.hide()
+	settings_btn.hide()
 	timer.yes_btn.hide()
 	timer.no_btn.hide()
 	responsebox.hide()
@@ -47,14 +58,10 @@ func _ready():
 	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
-	if not has_api_key():
-		print("yes")
+	if api_key == "":
+		print("has no api key")
 		settings_panel.show()
-		settings_panel.settings_saved.connect(_on_settings_saved)
-		settings_panel.back_pressed.connect(_on_settings_back)
 	else:
-		api_key = load_api_key()
-		print("key:", api_key)
 		ai_chat.set_api_key(api_key)
 		settings_panel.hide()
 
@@ -98,6 +105,7 @@ func show_menu():
 	dialog_trigger_btn.show()
 	study_btn.show()
 	exit_btn.show()
+	settings_btn.show()
 	anim.set_process_input(false)  # 禁止宠物继续接受输入，避免重复点击
 
 
@@ -108,6 +116,7 @@ func _on_dialog_button_pressed() -> void:
 	dialog_trigger_btn.hide()  # 点击后隐藏图标
 	study_btn.hide()
 	exit_btn.hide()
+	settings_btn.hide()
 	menu_btn.position = Vector2(433, 425)  # 改成你想要的位置
 	menu_btn.size = Vector2(30, 45)
 	menu_btn.show()
@@ -132,7 +141,8 @@ func _on_study_button_pressed() -> void:
 	start_study_mode()
 	
 func _on_exit_button_pressed() -> void:
-	byeAudio.play()
+	if not is_muted:
+		byeAudio.play()
 	await get_tree().create_timer(1.0).timeout  # 等待 2 秒
 	get_tree().quit() # 退出软件
 	
@@ -144,6 +154,7 @@ func start_study_mode():
 	exit_btn.hide()
 	tomato_btn.show()
 	menu_btn.show()
+	settings_btn.hide()
 	responsebox.show()
 
 func _on_tomato_button_pressed() -> void:
@@ -168,10 +179,12 @@ func _process(delta):
 		dialog_trigger_btn.hide()
 		exit_btn.hide()
 		study_btn.hide()
+		settings_btn.hide()
 	
 	# 如果悬停且当前是 sleeping 状态
 	if is_hovering and is_sleeping:
-		oiAudio.play()
+		if not is_muted:
+			oiAudio.play()
 		anim.play("jumping")
 		is_sleeping = false
 		is_jumping = true
@@ -218,23 +231,13 @@ func _on_settings_back():
 
 
 func _on_settings_button_pressed() -> void:
-	settings_panel.set_initial_values(api_key, is_muted)
+	#settings_panel.set_initial_values(api_key, is_muted)
 	settings_panel.show()
 	
-func has_api_key() -> bool:
-	var config = ConfigFile.new()
-	var err = config.load("user://settings.cfg")
-	if err != OK:
-		return false
-	print("🔍 Loaded api_key:", api_key, "（长度：", api_key.length(), "）")
-	return config.has_section_key("auth", "api_key") and config.get_value("auth", "api_key", "").strip_edges().length() > 0
-
-func load_api_key() -> String:
-	var config = ConfigFile.new()
-	if config.load("user://settings.cfg") == OK:
-		return config.get_value("auth", "api_key", "")
-	return ""
-
-func _on_api_key_saved(key: String):
-	print("API key saved: ", key)
-	ai_chat.set_api_key(key)
+#func has_api_key() -> bool:
+	#var config = ConfigFile.new()
+	#var err = config.load("user://settings.cfg")
+	#if err != OK:
+		#return false
+	#print("🔍 Loaded api_key:", api_key, "（长度：", api_key.length(), "）")
+	#return config.has_section_key("auth", "api_key") and config.get_value("auth", "api_key", "").strip_edges().length() > 0

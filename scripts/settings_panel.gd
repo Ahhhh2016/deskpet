@@ -26,6 +26,7 @@ func _on_save_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	emit_signal("back_pressed")
+	hide()
 
 
 func _on_mute_check_button_toggled(toggled_on: bool) -> void:
@@ -40,12 +41,18 @@ func save_settings(key: String, muted: bool):
 func load_settings():
 	var config = ConfigFile.new()
 	var err = config.load("user://settings.cfg")
-	if err == OK:
-		var key = config.get_value("auth", "api_key", "")
-		var muted = config.get_value("preferences", "is_muted", false)
-		api_key_input.text = str(key)
-		mute_checkbtn.button_pressed = muted
-		is_muted = muted  # 确保变量同步
+	
+	if err != OK:
+		print("⚠️ 配置文件不存在，使用默认设置。")
+		api_key_input.text = ""
+		is_muted = false
+		return
+		
+	var key = config.get_value("auth", "api_key", "")
+	var muted = config.get_value("preferences", "is_muted", false)
+	api_key_input.text = str(key)
+	mute_checkbtn.button_pressed = muted
+	is_muted = muted  # 确保变量同步
 
 func get_api_key() -> String:
 	return api_key_input.text.strip_edges()

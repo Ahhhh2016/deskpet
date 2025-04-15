@@ -388,9 +388,9 @@ offset_bottom = 103.0
 
 [node name="MuteCheckButton" type="CheckButton" parent="SettingsPanel"]
 layout_mode = 2
-offset_left = 117.0
+offset_left = 113.0
 offset_top = 96.0
-offset_right = 208.0
+offset_right = 204.0
 offset_bottom = 151.0
 
 [node name="QuitButton" type="Button" parent="SettingsPanel"]
@@ -439,9 +439,9 @@ text = "设置"
 
 [node name="Label4" type="Label" parent="SettingsPanel"]
 layout_mode = 0
-offset_left = 219.0
+offset_left = 222.0
 offset_top = 114.0
-offset_right = 249.0
+offset_right = 252.0
 offset_bottom = 141.0
 text = "🔇"
 
