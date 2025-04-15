@@ -183,7 +183,7 @@ func _process(delta):
 		settings_btn.hide()
 	
 	# 如果悬停且当前是 sleeping 状态
-	if is_hovering and is_sleeping:
+	if is_hovering:
 		if not is_muted:
 			oiAudio.play()
 		anim.play("jumping")
