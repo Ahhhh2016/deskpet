@@ -50,6 +50,7 @@ func _ready():
 	# 设置背景透明和一直置于顶层
 	get_window().always_on_top = true
 	get_window().set_transparent_background(true)
+	get_window().borderless = true
 
 	if not is_muted:
 		helloAudio.play()
@@ -91,22 +92,39 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				var mouse_pos = event.position
-				if is_mouse_over_pet(mouse_pos):
-					click_start_time = Time.get_ticks_msec() / 1000.0
-					click_start_pos = mouse_pos
-					dragging = true
-					drag_offset = global_position - mouse_pos
+				click_start_time = Time.get_ticks_msec() / 1000.0
+				click_start_pos = mouse_pos
 			else:
 				var click_duration = Time.get_ticks_msec() / 1000.0 - click_start_time
 				var move_distance = click_start_pos.distance_to(event.position)
-				if click_duration < CLICK_TIME_THRESHOLD and move_distance < DRAG_DISTANCE_THRESHOLD:
-					_on_pet_click() # 判定为点击
+				if click_duration < CLICK_TIME_THRESHOLD and move_distance < DRAG_DISTANCE_THRESHOLD and is_mouse_over_pet(event.position):
+					_on_pet_click() # 判定为左键点击
+				click_start_time = 0.0 # 重置点击开始时间
+				click_start_pos = Vector2.ZERO # 重置点击开始位置
+				dragging = false # 确保左键抬起时取消拖拽状态 (如果之前是通过右键拖拽的)
+
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed:
+				dragging = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+				drag_offset = get_global_mouse_position() - Vector2(get_window().get_position())
+			else:
 				dragging = false
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+	#elif event is InputEventMouseMotion and dragging:
+		#global_position = event.position + drag_offset
+		#var current_mouse_pos = get_global_mouse_position()
+		#var new_window_position = current_mouse_pos - drag_offset
+		#DisplayServer.window_set_position(new_window_position.floor())
+		#
 	elif event is InputEventMouseMotion and dragging:
-		global_position = event.position + drag_offset
-
-
+		#global_position = event.position + drag_offset
+		var relative_motion = event.relative
+		var current_window_position = DisplayServer.window_get_position()
+		var new_window_position = Vector2(current_window_position) + relative_motion
+		DisplayServer.window_set_position(new_window_position.floor())
+		
 func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	var sprite_rect = Rect2(
 		anim.global_position - (anim.sprite_frames.get_frame_texture(anim.animation, 0).get_size() * 0.5),
