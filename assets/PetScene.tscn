@@ -482,6 +482,11 @@ icon = ExtResource("57_c7vks")
 icon_alignment = 1
 expand_icon = true
 
+[node name="polygonAlpha" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.184314)
+polygon = PackedVector2Array(493, 396, 493, 207, 682, 206, 688, 430, 499, 430)
+uv = PackedVector2Array(493, 396, 493, 207, 682, 206, 687, 411, 506, 413)
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
 [connection signal="pressed" from="DialogButton" to="." method="_on_dialog_button_pressed"]

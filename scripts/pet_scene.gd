@@ -16,10 +16,11 @@ extends Node2D
 @onready var helloAudio = $KonnichiwaAudio
 @onready var settings_panel = $SettingsPanel
 @onready var settings_btn = $SettingsButton
+@onready var polygon_alpha: Polygon2D = $polygonAlpha # 引用 Polygon2D 节点
 
 var api_key: String = ""
 var is_muted: bool = false
-	
+
 var idle_time = 0.0
 const IDLE_THRESHOLD = 5.0
 const HIDE_MENU_THRESHOLD = 3.0
@@ -45,11 +46,11 @@ func _ready():
 	settings_panel.load_settings()
 	api_key = settings_panel.api_key_input.text
 	is_muted = settings_panel.is_muted
-	
+
 	# 设置背景透明和一直置于顶层
 	get_window().always_on_top = true
 	get_window().set_transparent_background(true)
-	
+
 	if not is_muted:
 		helloAudio.play()
 	dialog_trigger_btn.hide()
@@ -67,13 +68,23 @@ func _ready():
 	set_process_input(true)  # 启用输入检测
 	inputbox.connect("gui_input", Callable(self, "_on_inputbox_gui_input"))
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	
+
 	if api_key == "":
 		print("has no api key")
 		settings_panel.show()
 	else:
 		ai_chat.set_api_key(api_key)
 		settings_panel.hide()
+
+func _unhandled_input(event):
+	if event.is_action_pressed("exit"):
+		if not is_muted:
+			byeAudio.play()
+		await get_tree().create_timer(1.0).timeout  # 等待 1 秒
+		get_tree().quit()
+
+func _physics_process(_delta) -> void:
+	DisplayServer.window_set_mouse_passthrough(polygon_alpha.polygon)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -141,7 +152,6 @@ func _on_dialog_button_pressed() -> void:
 	menu_btn.size = Vector2(30, 45)
 	menu_btn.show()
 	is_chatting = true
-	
 
 
 func _on_send_button_pressed() -> void:
@@ -156,19 +166,19 @@ func _on_inputbox_gui_input(event):
 		# 检查是否是回车（Enter 或 Return）
 		if event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 			_on_send_button_pressed()
-			
+
 func _on_study_button_pressed() -> void:
 	start_study_mode()
-	
+
 func _on_exit_button_pressed() -> void:
 	if not is_muted:
 		byeAudio.play()
 	await get_tree().create_timer(1.0).timeout  # 等待 2 秒
 	get_tree().quit() # 退出软件
-	
+
 func start_study_mode():
 	anim.play("reading_book")
-	is_studying = true  
+	is_studying = true
 	dialog_trigger_btn.hide()
 	study_btn.hide()
 	exit_btn.hide()
@@ -200,18 +210,18 @@ func _process(delta):
 		study_btn.hide()
 		exit_btn.hide()
 		settings_btn.hide()
-		
+
 	# 鼠标移动时重置 idle_time
 	if mouse_pos != last_mouse_pos:
 		idle_time = 0.0
 		last_mouse_pos = mouse_pos
-	
+
 	if idle_time >= HIDE_MENU_THRESHOLD and is_showing_menu:
 		dialog_trigger_btn.hide()
 		exit_btn.hide()
 		study_btn.hide()
 		settings_btn.hide()
-	
+
 	# 如果悬停且当前是 sleeping 状态
 	if is_hovering and not dragging and not is_studying and not is_chatting:
 		if not is_muted:
@@ -257,11 +267,3 @@ func _on_settings_back():
 func _on_settings_button_pressed() -> void:
 	#settings_panel.set_initial_values(api_key, is_muted)
 	settings_panel.show()
-	
-#func has_api_key() -> bool:
-	#var config = ConfigFile.new()
-	#var err = config.load("user://settings.cfg")
-	#if err != OK:
-		#return false
-	#print("🔍 Loaded api_key:", api_key, "（长度：", api_key.length(), "）")
-	#return config.has_section_key("auth", "api_key") and config.get_value("auth", "api_key", "").strip_edges().length() > 0
