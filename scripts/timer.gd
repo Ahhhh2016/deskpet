@@ -53,7 +53,7 @@ func start_pomodoro_timer():
 	update_responsebox()
 
 func _process(delta):
-	if time_left > 0 && is_processing() == true:
+	if time_left > 0 and is_processing() == true:
 		remaining_time = time_left
 		update_responsebox()
 	else:

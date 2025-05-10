@@ -495,6 +495,11 @@ visible = false
 color = Color(1, 0.654902, 1, 0.211765)
 polygon = PackedVector2Array(506, 220, 675, 218, 703, 511, 648, 513, 644, 475, 422, 476, 424, 426, 503, 418)
 
+[node name="polygonAlphaSetting" type="Polygon2D" parent="."]
+visible = false
+color = Color(0.203922, 1, 1, 0.101961)
+polygon = PackedVector2Array(346, 12, 858, 10, 859, 200, 732, 200, 730, 463, 493, 410, 490, 219, 352, 214)
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
 [connection signal="pressed" from="DialogButton" to="." method="_on_dialog_button_pressed"]

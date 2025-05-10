@@ -17,6 +17,8 @@ extends Node2D
 @onready var settings_panel = $SettingsPanel
 @onready var settings_btn = $SettingsButton
 @onready var polygon_alpha_btn: Polygon2D = $polygonAlphaBtn # 引用 Polygon2D 节点
+@onready var polygon_alpha_chat: Polygon2D = $polygonAlphaChat
+@onready var polygon_alpha_setting: Polygon2D = $polygonAlphaSetting
 
 var api_key: String = ""
 var is_muted: bool = false
@@ -90,7 +92,7 @@ func _unhandled_input(event):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_LEFT and not is_chatting and not is_studying:
 			if event.pressed:
 				var mouse_pos = event.position
 				click_start_time = Time.get_ticks_msec() / 1000.0
@@ -111,6 +113,7 @@ func _input(event):
 				drag_offset = get_global_mouse_position() - Vector2(get_window().get_position())
 			else:
 				dragging = false
+				anim.play("idle")
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	#elif event is InputEventMouseMotion and dragging:
@@ -141,6 +144,8 @@ func _on_pet_click():
 
 func show_menu():
 	anim.play("idle")
+	DisplayServer.window_set_mouse_passthrough(polygon_alpha_btn.polygon)
+
 	is_sleeping = false
 	is_studying = false
 	is_chatting = false
@@ -171,6 +176,9 @@ func _on_dialog_button_pressed() -> void:
 	menu_btn.size = Vector2(30, 45)
 	menu_btn.show()
 	is_chatting = true
+	DisplayServer.window_set_mouse_passthrough(polygon_alpha_chat.polygon)
+
+	
 
 
 func _on_send_button_pressed() -> void:
@@ -219,6 +227,9 @@ func _process(delta):
 	idle_time += delta
 	var mouse_pos = get_viewport().get_mouse_position()
 	var is_hovering = is_mouse_over_pet(mouse_pos)
+	
+	if is_chatting:
+		anim.play("star_shining")
 
 	if dragging and not is_studying and not is_chatting:
 		anim.play("busy")
@@ -285,4 +296,5 @@ func _on_settings_back():
 
 func _on_settings_button_pressed() -> void:
 	#settings_panel.set_initial_values(api_key, is_muted)
+	DisplayServer.window_set_mouse_passthrough(polygon_alpha_setting.polygon)
 	settings_panel.show()
