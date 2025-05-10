@@ -41,6 +41,11 @@ func save_settings(key: String, muted: bool):
 func load_settings():
 	var config = ConfigFile.new()
 	var err = config.load("user://settings.cfg")
+	# macos path: /Users/<你的用户名>/Library/Application Support/Godot/app_userdata/deskpet-seiko/settings.cfg
+	# win path: C:\Users\<你的用户名>\AppData\Roaming\Godot\app_userdata\deskpet-seiko\settings.cfg
+	# linux path: /home/<你的用户名>/.local/share/godot/app_userdata/deskpet-seiko/settings.cfg
+
+
 	
 	if err != OK:
 		print("⚠️ 配置文件不存在，使用默认设置。")
