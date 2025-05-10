@@ -296,5 +296,5 @@ func _on_settings_back():
 
 func _on_settings_button_pressed() -> void:
 	#settings_panel.set_initial_values(api_key, is_muted)
-	DisplayServer.window_set_mouse_passthrough(polygon_alpha_setting.polygon)
 	settings_panel.show()
+	DisplayServer.window_set_mouse_passthrough(polygon_alpha_setting.polygon)
