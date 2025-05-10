@@ -78,6 +78,9 @@ func _ready():
 	if api_key == "":
 		print("has no api key")
 		settings_panel.show()
+		DisplayServer.window_set_mouse_passthrough(polygon_alpha_setting.polygon)
+
+		
 	else:
 		ai_chat.set_api_key(api_key)
 		settings_panel.hide()

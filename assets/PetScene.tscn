@@ -503,7 +503,6 @@ color = Color(1, 0.654902, 1, 0.211765)
 polygon = PackedVector2Array(506, 220, 675, 218, 703, 511, 648, 513, 644, 475, 422, 476, 424, 426, 503, 418)
 
 [node name="polygonAlphaSetting" type="Polygon2D" parent="."]
-visible = false
 color = Color(0.203922, 1, 1, 0.101961)
 polygon = PackedVector2Array(346, 12, 858, 10, 859, 200, 732, 200, 730, 463, 493, 410, 490, 219, 352, 214)
 
