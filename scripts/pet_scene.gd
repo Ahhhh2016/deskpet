@@ -16,7 +16,7 @@ extends Node2D
 @onready var helloAudio = $KonnichiwaAudio
 @onready var settings_panel = $SettingsPanel
 @onready var settings_btn = $SettingsButton
-@onready var polygon_alpha: Polygon2D = $polygonAlpha # 引用 Polygon2D 节点
+@onready var polygon_alpha_btn: Polygon2D = $polygonAlphaBtn # 引用 Polygon2D 节点
 
 var api_key: String = ""
 var is_muted: bool = false
@@ -51,6 +51,9 @@ func _ready():
 	get_window().always_on_top = true
 	get_window().set_transparent_background(true)
 	get_window().borderless = true
+	
+	DisplayServer.window_set_mouse_passthrough(polygon_alpha_btn.polygon)
+
 
 	if not is_muted:
 		helloAudio.play()
@@ -84,8 +87,6 @@ func _unhandled_input(event):
 		await get_tree().create_timer(1.0).timeout  # 等待 1 秒
 		get_tree().quit()
 
-func _physics_process(_delta) -> void:
-	DisplayServer.window_set_mouse_passthrough(polygon_alpha.polygon)
 
 func _input(event):
 	if event is InputEventMouseButton:

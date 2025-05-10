@@ -32,6 +32,7 @@ func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 func _on_pet_click():
 	if time_left > 0:
 		set_process(false)
+		set_paused(true)
 		#print("click")
 		yes_btn.show()
 		no_btn.show()
@@ -52,11 +53,12 @@ func start_pomodoro_timer():
 	update_responsebox()
 
 func _process(delta):
-	if time_left > 0:
+	if time_left > 0 && is_processing() == true:
 		remaining_time = time_left
 		update_responsebox()
 	else:
 		set_process(false)
+		#pause()
 
 
 func update_responsebox():
@@ -78,6 +80,7 @@ func _on_timeout() -> void:
 func _on_yes_button_pressed() -> void:
 	yes_btn.hide()
 	no_btn.hide()
+	set_process(false)
 	#parent_node.show_menu()
 	responsebox.text = ""
 	#tomato_btn.show()
@@ -88,5 +91,7 @@ func _on_yes_button_pressed() -> void:
 func _on_no_button_pressed() -> void:
 	yes_btn.hide()
 	no_btn.hide()
+	#start()
+	set_paused(false)
 	set_process(true)
 	update_responsebox()

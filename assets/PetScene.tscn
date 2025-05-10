@@ -482,10 +482,18 @@ icon = ExtResource("57_c7vks")
 icon_alignment = 1
 expand_icon = true
 
-[node name="polygonAlpha" type="Polygon2D" parent="."]
+[node name="polygonAlphaBtn" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(49.1111, 0)
+scale = Vector2(0.900383, 1)
 color = Color(1, 1, 1, 0.184314)
-polygon = PackedVector2Array(493, 396, 493, 207, 682, 206, 688, 430, 499, 430)
+polygon = PackedVector2Array(493, 396, 489.668, 214, 766.217, 209, 813.975, 252, 695.136, 259, 696.247, 326, 750.668, 325, 750.668, 469, 718.46, 469, 709.575, 428, 489.668, 430)
 uv = PackedVector2Array(493, 396, 493, 207, 682, 206, 687, 411, 506, 413)
+
+[node name="polygonAlphaChat" type="Polygon2D" parent="."]
+visible = false
+color = Color(1, 0.654902, 1, 0.211765)
+polygon = PackedVector2Array(506, 220, 675, 218, 703, 511, 648, 513, 644, 475, 422, 476, 424, 426, 503, 418)
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]
