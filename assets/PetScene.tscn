@@ -320,8 +320,14 @@ offset_left = 531.0
 offset_top = 106.0
 offset_right = 837.0
 offset_bottom = 209.0
+focus_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.466667, 0.662745, 0.752941, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 17
 fit_content = true
 vertical_alignment = 2
+selection_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -491,10 +497,11 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="polygonAlphaBtn" type="Polygon2D" parent="."]
+visible = false
 position = Vector2(49.1111, 0)
 scale = Vector2(0.900383, 1)
 color = Color(1, 1, 1, 0.184314)
-polygon = PackedVector2Array(493, 396, 489.668, 214, 766.217, 209, 813.975, 252, 695.136, 259, 696.247, 326, 750.668, 325, 748.447, 484, 717.349, 484, 709.575, 428, 489.668, 430)
+polygon = PackedVector2Array(493, 396, 489.668, 214, 766.217, 209, 813.975, 252, 695.136, 259, 696.247, 326, 750.668, 325, 748.447, 484, 657.375, 482, 657.375, 427, 489.668, 430)
 uv = PackedVector2Array(493, 396, 493, 207, 682, 206, 687, 411, 506, 413)
 
 [node name="polygonAlphaChat" type="Polygon2D" parent="."]
@@ -503,8 +510,9 @@ color = Color(1, 0.654902, 1, 0.211765)
 polygon = PackedVector2Array(506, 220, 675, 218, 703, 511, 648, 513, 644, 475, 422, 476, 424, 426, 503, 418)
 
 [node name="polygonAlphaSetting" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.203922, 1, 1, 0.101961)
-polygon = PackedVector2Array(346, 12, 858, 10, 859, 200, 732, 200, 730, 463, 493, 410, 490, 219, 352, 214)
+polygon = PackedVector2Array(346, 12, 858, 10, 859, 200, 732, 200, 730, 463, 493, 458, 490, 219, 352, 214)
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="request_completed" from="AIChat/HTTPRequest" to="AIChat" method="_on_http_request_request_completed"]

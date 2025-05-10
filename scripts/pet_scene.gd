@@ -30,6 +30,7 @@ var last_mouse_pos = Vector2.ZERO
 var is_sleeping = false
 var is_jumping = false
 var is_studying = false
+var is_onsetting = false
 var is_chatting = false
 var is_showing_menu = false
 
@@ -77,6 +78,7 @@ func _ready():
 
 	if api_key == "":
 		print("has no api key")
+		is_onsetting = true
 		settings_panel.show()
 		DisplayServer.window_set_mouse_passthrough(polygon_alpha_setting.polygon)
 
@@ -84,18 +86,12 @@ func _ready():
 	else:
 		ai_chat.set_api_key(api_key)
 		settings_panel.hide()
-
-func _unhandled_input(event):
-	if event.is_action_pressed("exit"):
-		if not is_muted:
-			byeAudio.play()
-		await get_tree().create_timer(1.0).timeout  # 等待 1 秒
-		get_tree().quit()
+		is_onsetting = false
 
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and not is_chatting and not is_studying:
+		if event.button_index == MOUSE_BUTTON_LEFT and not is_chatting and not is_studying and not is_onsetting:
 			if event.pressed:
 				var mouse_pos = event.position
 				click_start_time = Time.get_ticks_msec() / 1000.0
@@ -115,7 +111,7 @@ func _input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 				drag_offset = get_global_mouse_position() - Vector2(get_window().get_position())
 			else:
-				dragging = false
+				dragging = false 
 				anim.play("idle")
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -140,7 +136,7 @@ func is_mouse_over_pet(mouse_pos: Vector2) -> bool:
 	return sprite_rect.has_point(mouse_pos)
 
 func _on_pet_click():
-	if not is_studying:
+	if not is_studying and not is_chatting:
 		anim.play("idle")
 		show_menu()
 	#ai_chat.send_message("你好")
@@ -292,12 +288,15 @@ func _on_settings_saved(new_api_key: String, muted: bool):
 	print("新 API Key: ", api_key)
 	print("是否静音: ", is_muted)
 	settings_panel.hide()
+	is_onsetting = false
 
 func _on_settings_back():
 	settings_panel.hide()
+	is_onsetting = false
 
 
 func _on_settings_button_pressed() -> void:
 	#settings_panel.set_initial_values(api_key, is_muted)
 	settings_panel.show()
+	is_onsetting = true
 	DisplayServer.window_set_mouse_passthrough(polygon_alpha_setting.polygon)

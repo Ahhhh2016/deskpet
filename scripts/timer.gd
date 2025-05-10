@@ -8,8 +8,8 @@ extends Timer
 @onready var yes_btn = $YesButton
 @onready var no_btn = $NoButton
 @onready var parent_node = get_parent()
-#var study_time = 25 * 60  # 25分钟
-var study_time = 5
+var study_time = 25 * 60  # 25分钟
+#var study_time = 5
 
 var is_study = false
 
