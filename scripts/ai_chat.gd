@@ -45,5 +45,5 @@ func _on_request_completed(result, response_code, headers, body):
 	#print("🔍 原始返回数据：", data)
 	var response = JSON.parse_string(data) # Returns null if parsing failed.
 	response = response["output"]["text"]
-	#print(response)
+	print(response)
 	responsebox.text = response
