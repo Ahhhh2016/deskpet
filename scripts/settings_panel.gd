@@ -31,7 +31,8 @@ func _on_quit_button_pressed() -> void:
 
 func _on_mute_check_button_toggled(toggled_on: bool) -> void:
 	toggled_on = is_muted
-	
+
+# Save API key and mute setting to local config file
 func save_settings(key: String, muted: bool):
 	var config = ConfigFile.new()
 	config.set_value("auth", "api_key", key)
@@ -44,11 +45,9 @@ func load_settings():
 	# macos path: /Users/<你的用户名>/Library/Application Support/Godot/app_userdata/deskpet-seiko/settings.cfg
 	# win path: C:\Users\<你的用户名>\AppData\Roaming\Godot\app_userdata\deskpet-seiko\settings.cfg
 	# linux path: /home/<你的用户名>/.local/share/godot/app_userdata/deskpet-seiko/settings.cfg
-
-
 	
 	if err != OK:
-		print("⚠️ 配置文件不存在，使用默认设置。")
+		print("配置文件不存在，使用默认设置。")
 		api_key_input.text = ""
 		is_muted = false
 		return
@@ -57,7 +56,7 @@ func load_settings():
 	var muted = config.get_value("preferences", "is_muted", false)
 	api_key_input.text = str(key)
 	mute_checkbtn.button_pressed = muted
-	is_muted = muted  # 确保变量同步
+	is_muted = muted  # for consistency
 
 func get_api_key() -> String:
 	return api_key_input.text.strip_edges()
