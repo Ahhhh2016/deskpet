@@ -3,8 +3,8 @@
 **An AI Desktop Pet Built with Godot Engine (Seiko Edition)**
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/68136ceb-f19a-4691-8d84-20a885957150" width="400"/>
-  <img src="https://github.com/user-attachments/assets/3fc7412d-94f0-4ef0-ba06-713dc23927fe" width="300"/>
+  <img src="https://github.com/user-attachments/assets/68136ceb-f19a-4691-8d84-20a885957150" height="300"/>
+  <img src="https://github.com/user-attachments/assets/3fc7412d-94f0-4ef0-ba06-713dc23927fe" height="300"/>
 </div>
 
 ---
