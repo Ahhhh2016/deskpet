@@ -12,22 +12,22 @@
 ## ✨ 功能 Features
 
 * 💬 **对话功能**：点击宠物旁边的 💬 图标即可进入 AI 聊天模式（使用 qwen-plus 模型）
-  💬 **AI Chat Mode**: Click the 💬 button beside the pet to chat with it via the qwen-plus model
+* 💬 **AI Chat Mode**: Click the 💬 button beside the pet to chat with it via the qwen-plus model
 
 * 📚 **学习模式**：宠物进入读书动画并可开启番茄钟专注计时器
-  📚 **Study Mode**: The pet shows a reading animation and activates a Pomodoro-style focus timer
+* 📚*Study Mode**: The pet shows a reading animation and activates a Pomodoro-style focus timer
 
 * 💤 **睡眠机制**：长时间未交互时进入睡眠动画
-  💤 **Sleep Behavior**: The pet falls asleep after a period of inactivity
+* 💤 **Sleep Behavior**: The pet falls asleep after a period of inactivity
 
 * 🐭 **鼠标交互**：左键点击唤醒，右键拖动移动宠物位置
-  🐭 **Mouse Interaction**: Left click to wake the pet, right click to drag it anywhere
+* 🐭 **Mouse Interaction**: Left click to wake the pet, right click to drag it anywhere
 
 * ⚙️ **设置面板**：设置 API Key，开启/关闭静音等功能
-  ⚙️ **Settings Panel**: Set your API key, toggle mute, and other preferences
+* ⚙️ **Settings Panel**: Set your API key, toggle mute, and other preferences
 
 * 🔊 **语音提示**：内置问候和告别音效，可在设置中静音
-  🔊 **Voice Prompts**: Built-in sound effects for greetings and farewells (mute available)
+* 🔊 **Voice Prompts**: Built-in sound effects for greetings and farewells (mute available)
 
 ---
 
@@ -49,7 +49,9 @@
 📺 Full setup tutorial (in Chinese): [Video Link](https://www.bilibili.com/video/BV1No79zdEt5/)
 
 可以直接下载deskpet-seiko-1.0.dmg文件运行
+You can directly download the deskpet-seiko-1.0.dmg file and run it.
 如果报错“无法打开xxx，因为Apple无法检查其是否包含恶意软件“，需要在设置中选择“仍要打开”
+If the error message "Cannot open xxx because Apple cannot check whether it contains malware" is displayed, you need to select "Open anyway" in the settings
 
 ⚠️ **首次配置 API Key 后需要重启程序才能生效**
 ⚠️ **You must restart the app after setting the API key for the first time**
