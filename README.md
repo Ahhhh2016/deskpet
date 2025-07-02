@@ -5,7 +5,6 @@
   <img src="https://github.com/user-attachments/assets/3fc7412d-94f0-4ef0-ba06-713dc23927fe" height="300"/>
 </div>
 
----
 
 ## ✨ 功能
 
@@ -16,18 +15,17 @@
 - ⚙️ **设置面板**：设置 API Key，开启/关闭静音等功能
 - 🔊 **语音提示**：内置问候和告别音效，可在设置中静音
 
----
 
 ## 🧩 技术栈
 
 - 🎮 引擎：Godot 4.x（GDScript）
 - 🎞️ 动画：AnimatedSprite2D
-- 🌐 API 通信：自定义 AIChat 节点
+- 🌐 API 通信：通过 AIChat 节点发送 API 请求
 - 💾 配置存储：使用 ConfigFile 持久化存储 API Key 与静音设置
 
 📺 **API 请求与鼠标穿透的实现详解**：[视频链接](https://www.bilibili.com/video/BV1St34zMEkF/)
 
----
+
 
 ## 🚀 启动与配置
 
@@ -38,7 +36,7 @@
 
 ⚠️ **首次配置 API Key 后需要重启程序才能生效**
 
----
+
 
 ## 🔧 TODO
 
@@ -47,7 +45,7 @@
 - [ ] 修复 Windows 读取配置失败问题（导出后无法读取 config 文件）
 - [ ] Windows 多边形外区域渲染异常（需重绘 Polygon2D）
 
----
+
 
 ## ❤️ 鸣谢
 
@@ -56,14 +54,7 @@
 
 ---
 
-# DeskPet Seiko Edition — AI Desktop Pet Built with Godot
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/68136ceb-f19a-4691-8d84-20a885957150" height="300"/>
-  <img src="https://github.com/user-attachments/assets/3fc7412d-94f0-4ef0-ba06-713dc23927fe" height="300"/>
-</div>
-
----
+# DeskPet Seiko — AI Desktop Pet Built with Godot
 
 ## ✨ Features
 
@@ -74,7 +65,7 @@
 - ⚙️ **Settings Panel**: Configure API key, mute/unmute sounds, and other preferences
 - 🔊 **Voice Prompts**: Includes greeting and farewell sound effects (mute available)
 
----
+
 
 ## 🧩 Tech Stack
 
@@ -85,7 +76,7 @@
 
 📺 **Tutorial on API & mouse passthrough (Chinese)**: [Bilibili Video](https://www.bilibili.com/video/BV1St34zMEkF/)
 
----
+
 
 ## 🚀 Getting Started
 
@@ -96,7 +87,7 @@
 
 ⚠️ **You must restart the app after setting the API key for the first time**
 
----
+
 
 ## 🔧 TODO
 
@@ -105,7 +96,7 @@
 - [ ] Fix config file path issues on Windows (currently fails to run)
 - [ ] Fix polygon mask rendering on Windows
 
----
+
 
 ## ❤️ Credits
 
